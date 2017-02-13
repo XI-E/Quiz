@@ -1,0 +1,62 @@
+"Select the INCORRECT keyword in C++"
+"asm"
+"virtual"
+"statics"
+"float"
+3
+
+"String literal \"abc\" will be represented in the memory as _____"
+"abc\0"
+"abc/0"
+"abc|0"
+"abc_0"
+1
+
+"Which of the following header files contains the exit () function to terminate the current program in C++?"
+"<string.h>"
+"<process.h>"
+"<iomanip.h>"
+"<ctype.h>"
+2
+
+"Entomology is the science that studies ______"
+"Behavior of human beings"
+"Insects"
+"The origin and history of technical and scientific terms"
+"The formation of rocks"
+2
+
+"Hitler party which came into power in 1933 is known as"
+"Labour Party"
+"Nazi Party"
+"Ku-Klux-Klan"
+"Democratic Party"
+2
+	
+"The ozone layer restricts"
+"Visible light"
+"Infrared radiation"
+"X-rays and gamma rays"
+"Ultraviolet radiation"
+4
+
+"Find the correct spelling"
+"Treachrous"
+"Trecherous"
+"Trechearous"
+"Treacherous"
+4
+
+"Find the synonym of Frugal"
+"invention"
+"economical"
+"to whisper"
+"explore"
+2
+
+"Complete the sentence: Despite his best efforts to conceal his anger ________"
+"people came to know that he was annoyed"
+"he failed to give us an impression of his agony"
+"he succeeded in camouflaging his emotions"
+"he could succeed in doing it easily"
+1
