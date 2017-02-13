@@ -1,26 +1,35 @@
 # Script to convert questions in a .txt file to a .cpp file where they
 # are stored in a struct
 
-lvl1_txt = open("q_lvl1.txt", 'r');
-lvl1_cpp = open("q_lvl1.cpp", 'w');
+ques_cpp = open("ques.cpp", 'w');
 
-lvl1_cpp.write('#include "quiz.h"\n')
-lvl1_cpp.write('#include <string.h>\n\n')
-lvl1_cpp.write('struct questions[3][3][3];\n\n')
+ques_cpp.write('#include "quiz.h"\n')
+ques_cpp.write('#include <string.h>\n\n')
+ques_cpp.write('question questions[3][3][3];\n\n')
 
-for i in xrange(0,3):
-	for j in xrange(0,3):
-		question = lvl1_txt.readline()
-		w = "strcpy(questions[0][%d][%d].q, %s) ; \n" % (i, j, question[0:len(question) - 1])
-		lvl1_cpp.write(w)
-		for k in xrange(0, 4):
-			option = lvl1_txt.readline()
-			lvl1_cpp.write('strcpy(questions[0][%d][%d].options[%d], %s) ; \n' % (i, j, k, option[0:len(option) - 1]))
+for n in xrange(0,3):
+	if n == 0:
+		ques_txt = open("q_lvl1.txt");
+	elif n == 1:
+		ques_txt = open("q_lvl2.txt");
+	elif n == 2:
+		ques_txt = open("q_lvl3.txt");
+		
+	for i in xrange(0,3):
+		for j in xrange(0,3):
+			question = ques_txt.readline()
+			w = "strcpy(questions[%d][%d][%d].q, %s) ; \n" % (n, i, j, question[0:len(question) - 1])
+			ques_cpp.write(w)
+			for k in xrange(0, 4):
+				option = ques_txt.readline()
+				ques_cpp.write('strcpy(questions[%d][%d][%d].options[%d], %s) ; \n' % (n, i, j, k, option[0:len(option) - 1]))
 			
-		answer = lvl1_txt.readline()
-		lvl1_cpp.write('questions[0][%d][%d].correct = %s ; \n\n' % (i, j, answer[0:1]))
-		blank = lvl1_txt.readline()
+			answer = ques_txt.readline()
+			ques_cpp.write('questions[%d][%d][%d].correct = %s ; \n\n' % (n, i, j, answer[0:1]))
+			blank = ques_txt.readline()
+			
+	ques_txt.close()
 		
 		
 
-lvl1_txt.close();
+

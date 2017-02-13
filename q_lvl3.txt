@@ -1,0 +1,63 @@
+"In C++, which of the statements is valid?"
+"int &refs[10] ;"
+"int a2[] = a ;"
+"a + b = c ;"
+"None of the above"
+4
+
+"Which of the following statement is correct?"
+"A reference has to be de-referenced to access a value."
+"A reference does not need to be de-referenced to access a value."
+"A reference has to be double de-referenced to access a value."
+"Whether a reference should be de-referenced or not depends on the type of the reference."
+2
+
+"Which of the following is correct?"
+"A reference is declared using * operator."
+"Once a reference variable has been defined to refer to a particular variable it can refer to any other variable."
+"A reference must always be initialized within classes."
+"A variable can have multiple references."
+4
+
+"In which of the following years, the membership of the Security Council was increased from 11 to 15 (under Article 23)?"
+"1960"
+"1965"
+"1972"
+"1975"
+2
+
+"ICAO stands for ______"
+"International Civil Aviation Organization"
+"Indian Corporation of Agriculture Organization"
+"Institute of Company of Accounts Organization"
+"None of the above"
+1
+
+"India's first Technicolor film ____ in the early 1950s was produced by ____"
+"\'Jhansi Ki Rani\', Sohrab Modi"
+"\'Jhansi Ki Rani\', Sir Syed Ahmed"
+"\'Mirza Ghalib\', Sohrab Modi"
+"\'Mirza Ghalib\', Sir Syed Ahmed"
+1
+
+"Choose the correct spelling: "
+"Vetarinary"
+"Vetinary"
+"Veteninary"
+"Veterinary"
+4
+
+"Pick the synonym of FECUND: "
+"fertile"
+"hostile"
+"immature"
+"entangle"
+1
+
+"Pick the most appropriate word to complete the sentence: These slums are disgrace ________ the civic authorities."
+"towards"
+"on"
+"for"
+"to"
+4
+

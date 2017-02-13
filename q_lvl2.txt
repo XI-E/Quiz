@@ -1,0 +1,64 @@
+"In C++, the statement given below will result in ______ error"
+"Syntax"
+"Semantic"
+"Run-Time"
+"Logical"
+1
+
+"Which of the following is a valid real constant in exponent form in C++?"
+"172.E5"
+"1.52E07"
+"13,2E05"
+"17.17E2.3"
+1
+
+"In C++, the header file required to use setpricision() is ______"
+"<iostream.h>"
+"<math.h>"
+"<iomanip.h>"
+"<utility.h>"
+3
+
+"Which of the following are the members of SAARC (South Asian Association for Regional Cooperation)?"
+"Bhutan, Bangladesh, India and Pakistan"
+"Bhutan, Bangladesh, the Maldives, Nepal, India, Pakistan, Afghanistan and Sri Lanka"
+"Afghanistan, Pakistan, Thailand, Indonesia, Nepal and Sri Lanka"
+"None of the above"
+2
+
+"India's first satellite is named after ______"
+"Aryabhatta"
+"Bhaskara II"
+"Bhaskara I"
+"Albert Einstein"
+1
+
+"	
+In which year, terrorists crash two planes into New York's World Trade Centre on September 11 in a sequence of destruction?"
+"2000"
+"2001"
+"2002"
+"2003"
+2
+
+"What is the antonym of HUAGHTY?"
+"Cowardly"
+"Scared"
+"Pitiable"
+"Humble"
+4
+
+"Complete the statement: He is so lazy that he ______"
+"cannot depend on others for getting his work done"
+"dislike to postpone the work that he undertakes to do"
+"cannot delay the schedule of completing the work"
+"can seldom complete his work on time"
+4
+
+"Choose the correct spelling"
+"Palate"
+"Palet"
+"Palete"
+"Pelate"
+1
+
