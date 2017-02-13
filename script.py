@@ -7,6 +7,8 @@ ques_cpp.write('#include "quiz.h"\n')
 ques_cpp.write('#include <string.h>\n\n')
 ques_cpp.write('question questions[3][3][3];\n\n')
 
+ques_cpp.write('void init()\n{\n\n')
+
 for n in xrange(0,3):
 	if n == 0:
 		ques_txt = open("q_lvl1.txt");
@@ -30,6 +32,5 @@ for n in xrange(0,3):
 			
 	ques_txt.close()
 		
-		
-
-
+ques_cpp.write('}')
+ques_cpp.close()

@@ -3,6 +3,9 @@
 
 question questions[3][3][3];
 
+void init()
+{
+
 strcpy(questions[0][0][0].q, "Select the INCORRECT keyword in C++") ; 
 strcpy(questions[0][0][0].options[0], "asm") ; 
 strcpy(questions[0][0][0].options[1], "virtual") ; 
@@ -101,33 +104,33 @@ strcpy(questions[1][1][1].options[2], "Bhaskara I") ;
 strcpy(questions[1][1][1].options[3], "Albert Einstein") ; 
 questions[1][1][1].correct = 1 ; 
 
-strcpy(questions[1][1][2].q, "	) ; 
-strcpy(questions[1][1][2].options[0], In which year, terrorists crash two planes into New York's World Trade Centre on September 11 in a sequence of destruction?") ; 
-strcpy(questions[1][1][2].options[1], "2000") ; 
-strcpy(questions[1][1][2].options[2], "2001") ; 
-strcpy(questions[1][1][2].options[3], "2002") ; 
-questions[1][1][2].correct = " ; 
+strcpy(questions[1][1][2].q, "In which year, terrorists crash two planes into New York's World Trade Centre on September 11 in a sequence of destruction?") ; 
+strcpy(questions[1][1][2].options[0], "2000") ; 
+strcpy(questions[1][1][2].options[1], "2001") ; 
+strcpy(questions[1][1][2].options[2], "2002") ; 
+strcpy(questions[1][1][2].options[3], "2003") ; 
+questions[1][1][2].correct = 2 ; 
 
-strcpy(questions[1][2][0].q, ) ; 
-strcpy(questions[1][2][0].options[0], "What is the antonym of HUAGHTY?") ; 
-strcpy(questions[1][2][0].options[1], "Cowardly") ; 
-strcpy(questions[1][2][0].options[2], "Scared") ; 
-strcpy(questions[1][2][0].options[3], "Pitiable") ; 
-questions[1][2][0].correct = " ; 
+strcpy(questions[1][2][0].q, "What is the antonym of HUAGHTY?") ; 
+strcpy(questions[1][2][0].options[0], "Cowardly") ; 
+strcpy(questions[1][2][0].options[1], "Scared") ; 
+strcpy(questions[1][2][0].options[2], "Pitiable") ; 
+strcpy(questions[1][2][0].options[3], "Humble") ; 
+questions[1][2][0].correct = 4 ; 
 
-strcpy(questions[1][2][1].q, ) ; 
-strcpy(questions[1][2][1].options[0], "Complete the statement: He is so lazy that he ______") ; 
-strcpy(questions[1][2][1].options[1], "cannot depend on others for getting his work done") ; 
-strcpy(questions[1][2][1].options[2], "dislike to postpone the work that he undertakes to do") ; 
-strcpy(questions[1][2][1].options[3], "cannot delay the schedule of completing the work") ; 
-questions[1][2][1].correct = " ; 
+strcpy(questions[1][2][1].q, "Complete the statement: He is so lazy that he ______") ; 
+strcpy(questions[1][2][1].options[0], "cannot depend on others for getting his work done") ; 
+strcpy(questions[1][2][1].options[1], "dislike to postpone the work that he undertakes to do") ; 
+strcpy(questions[1][2][1].options[2], "cannot delay the schedule of completing the work") ; 
+strcpy(questions[1][2][1].options[3], "can seldom complete his work on time") ; 
+questions[1][2][1].correct = 4 ; 
 
-strcpy(questions[1][2][2].q, ) ; 
-strcpy(questions[1][2][2].options[0], "Choose the correct spelling") ; 
-strcpy(questions[1][2][2].options[1], "Palate") ; 
-strcpy(questions[1][2][2].options[2], "Palet") ; 
-strcpy(questions[1][2][2].options[3], "Palete") ; 
-questions[1][2][2].correct = " ; 
+strcpy(questions[1][2][2].q, "Choose the correct spelling") ; 
+strcpy(questions[1][2][2].options[0], "Palate") ; 
+strcpy(questions[1][2][2].options[1], "Palet") ; 
+strcpy(questions[1][2][2].options[2], "Palete") ; 
+strcpy(questions[1][2][2].options[3], "Pelate") ; 
+questions[1][2][2].correct = 1 ; 
 
 strcpy(questions[2][0][0].q, "In C++, which of the statements is valid?") ; 
 strcpy(questions[2][0][0].options[0], "int &refs[10] ;") ; 
@@ -192,3 +195,4 @@ strcpy(questions[2][2][2].options[2], "for") ;
 strcpy(questions[2][2][2].options[3], "to") ; 
 questions[2][2][2].correct = 4 ; 
 
+}

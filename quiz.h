@@ -10,4 +10,6 @@ struct question
 
 extern question questions[3][3][3];
 
+void init();
+
 #endif //QUIZ_H
