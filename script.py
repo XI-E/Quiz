@@ -3,11 +3,13 @@
 
 ques_cpp = open("ques.cpp", 'w');
 
+ques_cpp.write('/* Generated from script.py */ \n\n')
+
 ques_cpp.write('#include "quiz.h"\n')
 ques_cpp.write('#include <string.h>\n\n')
 ques_cpp.write('question questions[3][3][3];\n\n')
 
-ques_cpp.write('void init()\n{\n\n')
+ques_cpp.write('void init_ques()\n{\n\n')
 
 for n in xrange(0,3):
 	if n == 0:
