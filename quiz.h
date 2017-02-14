@@ -15,4 +15,17 @@ void init_ui();
 void win_frame();
 void printc(char*, int = (-1), int = WHITE, int = BLACK);
 
+struct coord
+{
+	coord(int x_inp, int y_inp)
+	{
+		x = x_inp;
+		y = y_inp;
+	}
+	int x;
+	int y;
+};
+
+void frame (coord = coord(-1,-1), int = -1, int = -1, int = 1);
+int lvl_inp_scr();
 #endif //QUIZ_H
