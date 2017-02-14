@@ -1,9 +1,18 @@
 #include <string.h>
 #include <conio.h>
+#include <iostream.h>
 #include "quiz.h"
 
-int width = (int) info.screenwidth;
-int height = (int) info.screenheight;
+int height, width;
+
+void some()
+{
+	struct text_info info;
+	gettextinfo(&info);
+
+	width = (int) info.screenwidth;
+	height = (int) info.screenheight;
+}
 
 void init_ui()
 {
@@ -11,25 +20,25 @@ void init_ui()
 	gotoxy(1, (height - 6) / 2);
 	printc("Some great awesome title here");
 	cout << "\n\n";
-	
+
 	int a = (width - strlen("Select difficulty level: ")) / 2;
 	printc("Select difficulty level: ", a);
 	cout << '\n';
-	
-	
+
+
 	int selected = 0; //Boolean value to express whether any option has been chosen
 	int curr_line = 0; //Indicates the position of current line that is highlighted
-	
+
 	while(!selected)
 	{
 		printc("Easy", a); cout << '\n';
 		printc("Intermediate", a); cout << '\n';
 		printc("Hard", a); cout << '\n';
-	
+
 		//Highlighting the option to show current line
 		gotoxy(a - 2, (height - 6) / 2 + 3 + curr_line);
 		cout << (char) 175;
-		
+
 		//Detecting arrow keys
 		char c = getch();
 		if(c == 0)
@@ -57,7 +66,7 @@ void init_ui()
 	}
 }
 
-void printq(int a, int b, int c, int q_no)
+/*void printq(int a, int b, int c, int q_no)
 {
 	struct text_info info;
 	gettextinfo(&info);
@@ -78,7 +87,7 @@ void printq(int a, int b, int c, int q_no)
 	gotoxy(1, (height - text_h) / 2);
 
 
-}
+} */
 
 void win_frame()
 {
@@ -116,7 +125,7 @@ void win_frame()
 	cout << r_down;
 }
 
-void printc(char str[], int ws = -1, int t_color = WHITE, int b_color = BLACK)
+void printc(char str[], int ws, int t_color, int b_color)
 {
 	if(ws == -1)
 	{
@@ -130,5 +139,4 @@ void printc(char str[], int ws = -1, int t_color = WHITE, int b_color = BLACK)
 	textcolor(t_color);
 	textbackground(b_color);
 	cprintf("%s", str);
-	cout << '\n';
 }
