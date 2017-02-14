@@ -3,6 +3,8 @@
 #include <iostream.h>
 #include "quiz.h"
 
+extern question questions[3][3][3];
+
 int height, width;
 
 void init_ui()
@@ -12,15 +14,6 @@ void init_ui()
 
 	width = (int) info.screenwidth;
 	height = (int) info.screenheight;
-
-	frame();
-
-	int lvl = lvl_inp_scr();  //Gets the difficulty level from user.
-								//Also includes ui for that page
-
-	clrscr();
-	cout << "You selected " << lvl;
-
 }
 
 /*void printq(int a, int b, int c, int q_no)
@@ -109,21 +102,80 @@ void printc(char str[], int ws, int t_color, int b_color)
 }
 
 /*
- Difficulty level input screen
+ Generates user interface
+ Screen_num:
+	1: difficulty level
+	2: Subject
 */
-int lvl_inp_scr()
+int generate_ui(int screen_num, int lvl, int sub, int q_num)
 {
+	clrscr();
+	frame();
+
+	char title[] = "SOME GREAT AWESOME TITLE HERE";
+	char head[100], op1[100], op2[100], op3[100], op4[100];
+	if(screen_num == 1)
+	{
+		strcpy(head, "Select difficulty level: ");
+		strcpy(op1, "Easy");
+		strcpy(op2, "Intermediate");
+		strcpy(op3, "Hard");
+		strcpy(op4, "");
+	}
+	else if(screen_num == 2)
+	{
+		strcpy(head, "Select subject: ");
+		strcpy(op1, "Computer Science (C++)");
+		strcpy(op2, "General Knowledge");
+		strcpy(op3, "English");
+		strcpy(op4, "");
+	}
+	else if(screen_num == 3)
+	{
+		strcpy(head, questions[lvl][sub][q_num].q);
+		strcpy(op1, questions[lvl][sub][q_num].options[0]);
+		strcpy(op2, questions[lvl][sub][q_num].options[1]);
+		strcpy(op3, questions[lvl][sub][q_num].options[2]);
+		strcpy(op4, questions[lvl][sub][q_num].options[3]);
+	}
+
 	gotoxy(1, (height - 6) / 2);
-	printc("Some great awesome title here");
+
+	if(screen_num == 3)
+	{
+		gotoxy(1, (height - 7) / 2);
+	}
+
+	printc(title);
 	cout << "\n\n";
 
-	int a = (width - strlen("Select difficulty level: ")) / 2;
+	int lengths[] = {
+					  strlen(head),
+					  strlen(op1),
+					  strlen(op2),
+					  strlen(op3),
+					  strlen(op4)
+					};
+
+	//Determining max length
+	int max_len = lengths[0];
+	for(int i = 0; i < 5; i++)
+	{
+		for(int j = i + 1; j < 5; j++)
+		{
+			if(lengths[j] > max_len)
+			{
+				max_len = lengths[j];
+			}
+		}
+	}
+
+	int a = (width - max_len) / 2;
 	coord b(a - 4,wherey());
-	frame(b, 6, strlen("Select difficulty level: ") + 8, 0);
+	frame(b, (screen_num == 3 ? 7 : 6), max_len + 8, 0);
 
-	printc("Select difficulty level: ", a);
+	printc(head, a);
 	cout << '\n';
-
 
 	int selected = 0; //Boolean value to express whether any option has been chosen
 	int curr_line = 0; //Indicates the position of current line that is highlighted
@@ -131,12 +183,26 @@ int lvl_inp_scr()
 	while(!selected)
 	{
 		gotoxy(wherex(), b.y + 3);
-		printc("Easy", a); cout << '\n';
-		printc("Intermediate", a); cout << '\n';
-		printc("Hard", a); cout << '\n';
+		printc(op1, a); cout << '\n';
+		printc(op2, a); cout << '\n';
+		printc(op3, a); cout << '\n';
+		if(screen_num == 3)
+		{
+			printc(op4, a); cout << '\n';
+		}
+
+		int num;
+		if(screen_num == 3)
+		{
+			num = 4;
+		}
+		else
+		{
+			num = 3;
+		}
 
 		//Highlighting the option to show current line
-		for(int i = 0; i < 3; i++)
+		for(int i = 0; i < num; i++)
 		{
 			if(i == curr_line)
 			{
@@ -163,10 +229,10 @@ int lvl_inp_scr()
 					curr_line++;
 					break;
 			}
-			curr_line %= 3;
+			curr_line %= num;
 			if(curr_line < 0)
 			{
-				curr_line += 3;
+				curr_line += num;
 			}
 		}
 		else if(c == 13) //If enter was pressed

@@ -27,5 +27,7 @@ struct coord
 };
 
 void frame (coord = coord(-1,-1), int = -1, int = -1, int = 1);
-int lvl_inp_scr();
+int generate_ui(int screen_num, int lvl = -1, int sub = -1, int q_num = -1);
+int ask_q(int lvl, int sub);
+
 #endif //QUIZ_H
