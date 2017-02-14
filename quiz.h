@@ -1,5 +1,7 @@
 #ifndef QUIZ_H
-#define QUIZ
+#define QUIZ_H
+
+#include <conio.h>
 
 struct question
 {
@@ -8,8 +10,9 @@ struct question
 	int correct;
 };
 
-extern question questions[3][3][3];
-
-void init();
+void init_ques();
+void init_ui();
+void win_frame();
+void printc(char*, int = (-1), int = WHITE, int = BLACK);
 
 #endif //QUIZ_H

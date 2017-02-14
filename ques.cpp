@@ -1,9 +1,11 @@
+/* Generated from script.py */ 
+
 #include "quiz.h"
 #include <string.h>
 
 question questions[3][3][3];
 
-void init()
+void init_ques()
 {
 
 strcpy(questions[0][0][0].q, "Select the INCORRECT keyword in C++") ; 

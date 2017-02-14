@@ -6,7 +6,8 @@ void main()
 {
 	clrscr();
 	
-	init();
+	init_ques();
+	init_ui();
 	
 	cout << questions[0][1][2].q;
 	
