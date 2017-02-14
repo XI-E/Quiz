@@ -33,8 +33,7 @@
 "Albert Einstein"
 1
 
-"	
-In which year, terrorists crash two planes into New York's World Trade Centre on September 11 in a sequence of destruction?"
+"In which year, terrorists crash two planes into New York's World Trade Centre on September 11 in a sequence of destruction?"
 "2000"
 "2001"
 "2002"
