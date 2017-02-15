@@ -1,12 +1,4 @@
 #include "helpers.h"
-#include <iostream.h>
-#include <conio.h>
-#include <ctype.h>
-#include <string.h>
-#include <time.h>
-#include <stdlib.h>
-#include <iostream.h>
-#include <stdio.h>
 
 int wrap(char inp_str[], char out_str[],int length)
 {

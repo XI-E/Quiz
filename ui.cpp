@@ -1,10 +1,4 @@
-#include <string.h>
-#include <conio.h>
-#include <iostream.h>
 #include "quiz.h"
-#include <stdio.h>
-#include <process.h>
-#include <dos.h>
 
 #define TITLE "SOME GREAT AWESOME TITLE HERE"
 
@@ -14,6 +8,9 @@ int height, width;
 
 void init_ui()
 {
+	textcolor(LIGHTGRAY);
+	textbackground(BLACK);
+
 	struct text_info info;
 	gettextinfo(&info);
 

@@ -1,5 +1,3 @@
-#include <iostream.h>
-#include <conio.h>
 #include "quiz.h"
 
 extern question questions[3][3][3];
