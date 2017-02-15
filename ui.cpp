@@ -1,6 +1,6 @@
 #include "quiz.h"
 
-#define TITLE "SOME GREAT AWESOME TITLE HERE"
+#define TITLE "TEST YOUR KNOWLEDGE!"
 
 extern question questions[3][3][3];
 
