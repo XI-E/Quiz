@@ -1,22 +1,23 @@
 #include <iostream.h>
 #include <conio.h>
 #include <time.h>
+#include <string.h>
 #include "quiz.h"
 
 extern question questions[3][3][3];
+extern height;
+extern width;
 
 int ask_q(int lvl, int sub)
 {
+	int correct_ans = 0;
 	for(int i = 0; i < 3; i++)
-	{
-		int selected_ans = generate_ui(3, lvl, sub, i) + 1;
-		if(selected_ans == questions[lvl][sub][i].correct)
+	{		
+		int is_correct = generate_ui(lvl, sub, i);
+				
+		if(is_correct)
 		{
-			cout << "Correct Answer";
-		}
-		else
-		{
-			cout << "Incorrect Answer";
+			correct_ans++;
 		}
 		getch();
 	}
@@ -25,7 +26,10 @@ int ask_q(int lvl, int sub)
 
 	while(1)
 	{
-		cout << "Do you want to play again? (y/n)";
+		frame();
+		gotoxy((width - strlen("You got _ out of 3 questions correct")) / 2 + 1, (height - 3) / 2 + 1);
+		cout << "You got " << correct_ans << " out of 3 questions correct\n\n";
+		printc("Do you want to play again? (y/n)");
 		char c = getch();
 		switch(c)
 		{

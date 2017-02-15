@@ -20,7 +20,6 @@ void main()
 
 		int sub = generate_ui(2);  //Gets the subject from user
 
-		int play = ask_q(lvl, sub);
+		play = ask_q(lvl, sub);
 	}
-	getch();
 }

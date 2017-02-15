@@ -16,7 +16,7 @@ strcpy(questions[0][0][0].options[3], "float") ;
 questions[0][0][0].correct = 3 ; 
 
 strcpy(questions[0][0][1].q, "String literal \"abc\" will be represented in the memory as _____") ; 
-strcpy(questions[0][0][1].options[0], "abc\0") ; 
+strcpy(questions[0][0][1].options[0], "abc\\0") ; 
 strcpy(questions[0][0][1].options[1], "abc/0") ; 
 strcpy(questions[0][0][1].options[2], "abc|0") ; 
 strcpy(questions[0][0][1].options[3], "abc_0") ; 
@@ -71,19 +71,19 @@ strcpy(questions[0][2][2].options[2], "he succeeded in camouflaging his emotions
 strcpy(questions[0][2][2].options[3], "he could succeed in doing it easily") ; 
 questions[0][2][2].correct = 1 ; 
 
-strcpy(questions[1][0][0].q, "In C++, the statement given below will result in ______ error") ; 
-strcpy(questions[1][0][0].options[0], "Syntax") ; 
-strcpy(questions[1][0][0].options[1], "Semantic") ; 
-strcpy(questions[1][0][0].options[2], "Run-Time") ; 
-strcpy(questions[1][0][0].options[3], "Logical") ; 
-questions[1][0][0].correct = 1 ; 
+strcpy(questions[1][0][0].q, "The pointer which always stores the current active object address is _____") ; 
+strcpy(questions[1][0][0].options[0], "auto_ptr") ; 
+strcpy(questions[1][0][0].options[1], "this") ; 
+strcpy(questions[1][0][0].options[2], "p") ; 
+strcpy(questions[1][0][0].options[3], "None of the above") ; 
+questions[1][0][0].correct = 2 ; 
 
 strcpy(questions[1][0][1].q, "Which of the following is a valid real constant in exponent form in C++?") ; 
 strcpy(questions[1][0][1].options[0], "172.E5") ; 
 strcpy(questions[1][0][1].options[1], "1.52E07") ; 
 strcpy(questions[1][0][1].options[2], "13,2E05") ; 
 strcpy(questions[1][0][1].options[3], "17.17E2.3") ; 
-questions[1][0][1].correct = 1 ; 
+questions[1][0][1].correct = 2 ; 
 
 strcpy(questions[1][0][2].q, "In C++, the header file required to use setpricision() is ______") ; 
 strcpy(questions[1][0][2].options[0], "<iostream.h>") ; 
