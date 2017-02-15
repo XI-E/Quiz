@@ -6,7 +6,7 @@
 3
 
 "String literal \"abc\" will be represented in the memory as _____"
-"abc\0"
+"abc\\0"
 "abc/0"
 "abc|0"
 "abc_0"

@@ -1,16 +1,16 @@
-"In C++, the statement given below will result in ______ error"
-"Syntax"
-"Semantic"
-"Run-Time"
-"Logical"
-1
+"The pointer which always stores the current active object address is _____"
+"auto_ptr"
+"this"
+"p"
+"None of the above"
+2
 
 "Which of the following is a valid real constant in exponent form in C++?"
 "172.E5"
 "1.52E07"
 "13,2E05"
 "17.17E2.3"
-1
+2
 
 "In C++, the header file required to use setpricision() is ______"
 "<iostream.h>"
