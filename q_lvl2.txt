@@ -40,7 +40,7 @@
 "2003"
 2
 
-"What is the antonym of HUAGHTY?"
+"What is the antonym of HAUGHTY?"
 "Cowardly"
 "Scared"
 "Pitiable"
