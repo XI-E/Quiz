@@ -1,5 +1,13 @@
-# Script to convert questions in a .txt file to a .cpp file where they
-# are stored in a struct
+# Converts Q's in .txt to struct in .cpp
+#
+# Script to convert questions in a .txt file to a .cpp file where they are stored in a struct
+# The questions are read from files:
+# 	1. q_lvl1.txt
+#	2. q_lvl2.txt
+#	3. q_lvl3.txt
+#
+# They are wrapped in a function init_ques() that initialises these questions in a question type variable called questions
+# \sa question, init_ques()
 
 ques_cpp = open("ques.cpp", 'w');
 
