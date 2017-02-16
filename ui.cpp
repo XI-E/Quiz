@@ -8,6 +8,7 @@ int height, width;
 
 void init_ui()
 {
+	_setcursortype(_NOCURSOR);
 	textcolor(LIGHTGRAY);
 	textbackground(BLACK);
 
