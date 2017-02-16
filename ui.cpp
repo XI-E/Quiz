@@ -8,13 +8,14 @@ int height, width;
 
 void init_ui()
 {
-	_setcursortype(_NOCURSOR);
+	_setcursortype(_NOCURSOR); //hides cursor
 	textcolor(LIGHTGRAY);
 	textbackground(BLACK);
 
 	struct text_info info;
 	gettextinfo(&info);
 
+	//height and witdth of screen
 	width = (int) info.screenwidth;
 	height = (int) info.screenheight;
 }
@@ -69,7 +70,7 @@ void printc(char str[], int ws, int t_color, int b_color)
 {
 	if(ws == -1)
 	{
-		gotoxy((width - strlen(str))/2 ,wherey());
+		gotoxy((width - strlen(str))/2 + 1 ,wherey());
 	}
 	else
 	{
@@ -289,20 +290,19 @@ int generate_ui(int lvl, int sub, int q_num)
 		strcat(pr,a);
 		printc(pr);
 		return 0;
-	}
-	
+	}	
 }
 
-int select(coord line1, int num_ops, char bullet)
+int select(coord bullet1, int num_ops, char bullet)
 {
 	int height_ops[] = {1,1,1,1,1};
-	return select(line1, num_ops, height_ops, bullet); 
+	return select(bullet1, num_ops, height_ops, bullet); 
 }
 
-int select(coord line1, int num_ops, int height_ops[], char bullet)
+int select(coord bullet1, int num_ops, int height_ops[], char bullet)
 {
 	int curr_line = 0;
-	gotoxy(line1.x, line1.y); cout << bullet;
+	gotoxy(bullet1.x, bullet1.y); cout << bullet;
 	while(1)
 	{
 		char c = getch();
@@ -329,8 +329,8 @@ int select(coord line1, int num_ops, int height_ops[], char bullet)
 		{
 			coord bullet_pos;
 			
-			bullet_pos.x = line1.x;
-			bullet_pos.y = line1.y;
+			bullet_pos.x = bullet1.x;
+			bullet_pos.y = bullet1.y;
 			for(int j = 0; j < i; j++)
 			{
 				bullet_pos.y += height_ops[j];
