@@ -1,6 +1,6 @@
 var NAVTREE =
 [
-  [ "Test your Knowledge", "index.html", [
+  [ "Test Your Knowledge", "index.html", [
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
       [ "Class Index", "classes.html", null ],

@@ -8,5 +8,7 @@ var quiz_8h =
     [ "generate_ui", "quiz_8h.html#a27adcbd37f5bc3b6207c5eaf8456329b", null ],
     [ "init_ques", "quiz_8h.html#a1489cad17ce239f2043696bf999758b6", null ],
     [ "init_ui", "quiz_8h.html#a07814dc8754136bf542c47f3a62358a1", null ],
-    [ "printc", "quiz_8h.html#a3a66ebaa48a09f5be4284fc29388a318", null ]
+    [ "printc", "quiz_8h.html#a3a66ebaa48a09f5be4284fc29388a318", null ],
+    [ "select", "quiz_8h.html#ab815a51efac00a8e1a4eb5f79715e06c", null ],
+    [ "select", "quiz_8h.html#ae994adf942b0f18858c242cc001490f8", null ]
 ];
