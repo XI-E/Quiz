@@ -42,7 +42,7 @@ void init_ques();
 void init_ui();
 
 //! Prints the input string at center of line
-/*
+/*!
  Prints the input string at center; If ws is defined, it prints the string with ws
  number of ' ' characters before the string. The text color and background color are
  specified through t_color and b_color respectively.
@@ -116,7 +116,7 @@ int generate_ui(int lvl, int sub, int q_num);
 //askq.cpp
 
 //! Asks questions
-/*
+/*!
  Uses generate_ui() to ask questions, keeps track of correct answers, prints
  it at the end of quiz and asks the user whether to continue playing.
  @param[in] lvl   Difficulty Level
@@ -142,8 +142,12 @@ int select(coord bullet1, int num_ops, int* height_ops, char bullet = (char) 175
 
 /*!
  \overload
+ @param[in] bullet1    Co-ordinate of first bullet
+ @param[in] num_ops    Number of options
+ @param[in] bullet     Character to be printed as bullet
+ @return The selected option (starts from 0)
 */
-int select(coord line1, int num_ops, char bullet = (char) 175);
+int select(coord bullet1, int num_ops, char bullet = (char) 175);
 
 
 #endif //QUIZ_H

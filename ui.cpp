@@ -1,18 +1,19 @@
 #include "quiz.h"
 
-#define TITLE "TEST YOUR KNOWLEDGE!"
+#define TITLE "TEST YOUR KNOWLEDGE!" //!< Title for the quiz
 
 extern question questions[3][3][3];
 
-int height, width;
+int height; //!< Height of the screen
+int width; //!< Width of the screen
 
 void init_ui()
 {
-	_setcursortype(_NOCURSOR); //hides cursor
+	_setcursortype(_NOCURSOR); //!<hides cursor
 	textcolor(LIGHTGRAY);
 	textbackground(BLACK);
 
-	struct text_info info;
+	struct text_info info; //!< Information regarding the screen, etc.
 	gettextinfo(&info);
 
 	//height and witdth of screen
@@ -22,16 +23,17 @@ void init_ui()
 
 void frame(coord up_left, int f_height, int f_width, int f_sides)
 {
+	//! Characters for printing the frame
 	char l_up = (char) 201;
 	char l_down = (char) 200;
-	char r_up = (char) 187;
-	char r_down = (char) 188;
-	char bet_ver = (char) 186;
+	char r_up = (char) 187; 
+	char r_down = (char) 188; 
+	char bet_ver = (char) 186; 
 	char bet_hor = (char) 205;
 
 	if(up_left.x == -1)
 	{
-		coord b(1,1);
+		coord b(1,1); //! Upper left corner of the screen
 		up_left = b;
 		f_width = width;
 		f_height = height - 1;
@@ -93,8 +95,11 @@ int generate_ui(int screen_num)
 	clrscr();
 	frame();
 
-	char title[] = TITLE;
-	char head[100], op1[100], op2[100], op3[100];
+	char title[] = TITLE; //!< title for the quiz
+	char head[100]; //!< head of the section
+	
+	char op1[100], op2[100], op3[100];
+
 	if(screen_num == 1)
 	{
 		strcpy(head, "Select difficulty level: ");
@@ -120,10 +125,10 @@ int generate_ui(int screen_num)
 					  strlen(op1),
 					  strlen(op2),
 					  strlen(op3),
-					};
+					}; //!< string lengths of head and options
 
 	//Determining max length
-	int max_len = lengths[0];
+	int max_len = lengths[0]; //!< The maximum value of string lengths stored in lengths
 	for(int i = 0; i < 4; i++)
 	{
 		for(int j = i + 1; j < 4; j++)
@@ -135,14 +140,14 @@ int generate_ui(int screen_num)
 		}
 	}
 
-	int a = (width - max_len) / 2;
-	coord b(a - 4,wherey());
+	int a = (width - max_len) / 2; //!< Whitespace before head and all options
+	coord b(a - 4,wherey()); //!< Upper left corner of internal frame
 	frame(b, 6, max_len + 8, 0);
 
 	printc(head, a);
 	cout << '\n';
 	
-	coord bullet1(b.x + 2, wherey());
+	coord bullet1(b.x + 2, wherey()); //!< Position of the first bullet
 	
 	gotoxy(bullet1.x + 2, bullet1.y); printc(op1, a); cout << '\n';
 	gotoxy(bullet1.x + 2, bullet1.y + 1); printc(op2, a); cout << '\n';
@@ -186,7 +191,8 @@ int generate_ui(int lvl, int sub, int q_num)
 	gotoxy(width - strlen(print), 2);
 	cout << print;
 	
-	char ques[200], options[4][200];
+	char ques[200]; //!< String containing questions
+	char options[4][200]; //!< String array containing the four options
 
 	strcpy(ques, questions[lvl][sub][q_num].q);
 	strcpy(options[0], questions[lvl][sub][q_num].options[0]);
@@ -194,8 +200,8 @@ int generate_ui(int lvl, int sub, int q_num)
 	strcpy(options[2], questions[lvl][sub][q_num].options[2]);
 	strcpy(options[3], questions[lvl][sub][q_num].options[3]);
 
-	int f_width = (8 * width) / 10;
-	int ws = (width - f_width) / 2;
+	int f_width = (8 * width) / 10; //!< Width of the internal frame
+	int ws = (width - f_width) / 2; //!< Whitespace before the left edge of frame
 
 	int lengths[] = {
 					 strlen(ques),
@@ -203,10 +209,10 @@ int generate_ui(int lvl, int sub, int q_num)
 					 strlen(options[1]),
 					 strlen(options[2]),
 					 strlen(options[3])
-					};
+					}; //!< array that stores lengths of the question and options
 
-	int f_height = 2 + lengths[0] / f_width + 1;
-	int f_ws = 3;  //Whitespace inside frame for options
+	int f_height = 2 + lengths[0] / f_width + 1; //!< Height of the internal frame
+	int f_ws = 3;  //!< Whitespace inside frame for options
 	for(int i = 1; i < 5; i++)
 	{
 		f_height += lengths[i] / (f_width - f_ws) + 1;
@@ -215,23 +221,25 @@ int generate_ui(int lvl, int sub, int q_num)
 	coord u_left(ws + 1, (height - f_height) / 2 + 1);
 	frame(u_left, f_height, f_width, 0);
 	
-	char printq[] = "Question ";
+	char printq[] = "Question "; //!< The question string to be printed
 	gotoxy((width - strlen(printq) - 1) / 2 + 1, 2);
 	cout << printq << q_num + 1;
 	
 	gotoxy(1, (height - f_height) / 2 - 3);
 	printc(TITLE);
 
-	char fstring[200] = "";
+	char fstring[200] = ""; //!< Formatted string for out_str of wrap()
 
 	int height_ops[4] = {0,0,0,0};
 	int height_ques = wrap(ques, fstring, f_width - f_ws);
 
 	int line_num = 1;
-	char line[200];
-	int read;
-	int chars_read = 0;
-	coord ques_coord(u_left.x + 1, u_left.y + 2);
+	char line[200]; 
+	int read; //!< Number of characters read in current line
+	int chars_read = 0; //!< Total number of characters read
+	
+	//! Coordinates from where to start printing question
+	coord ques_coord(u_left.x + 1, u_left.y + 2); 
 
 	for(i = 0; i < height_ques; i++)
 	{
@@ -243,18 +251,20 @@ int generate_ui(int lvl, int sub, int q_num)
 	}
 
 	strcpy(fstring, "");
-
-	coord bullet1(ques_coord.x, ques_coord.y + height_ques);
+	
+	//! Coordinates of first bullet
+	coord bullet1(ques_coord.x, ques_coord.y + height_ques); 
 
 	for(i = 0; i < 4; i++)
 	{
 		height_ops[i] = wrap(options[i], fstring, f_width - f_ws - 3 - 2);
 		read = 0, chars_read = 0;
 
-		int len = strlen(fstring);
+		int len = strlen(fstring); //!< length of fstring
 		fstring[len] = '\n'; fstring[len+1] = '\0';
 
-		coord op_start(bullet1.x + 2 + 3, bullet1.y); // x: +2 space for bullet, +3 space for option letter
+		//! x: +2 space for bullet, +3 space for option letter
+		coord op_start(bullet1.x + 2 + 3, bullet1.y); 
 		
 		for(int j = 0; j < i; j++)
 		{
@@ -276,7 +286,8 @@ int generate_ui(int lvl, int sub, int q_num)
 		strcpy(fstring, "");
 	}
 	
-	int selected_ans = select(bullet1, 4, height_ops) + 1;
+	//! The option selected by the user (counts from 1)
+	int selected_ans = select(bullet1, 4, height_ops) + 1; 
 	gotoxy(1, (height - f_height) / 2 - 1);
 	if(selected_ans == questions[lvl][sub][q_num].correct)
 	{
@@ -301,11 +312,12 @@ int select(coord bullet1, int num_ops, char bullet)
 
 int select(coord bullet1, int num_ops, int height_ops[], char bullet)
 {
-	int curr_line = 0;
+	//! current line on which the bullet is on (counts from 0)
+	int curr_line = 0; 
 	gotoxy(bullet1.x, bullet1.y); cout << bullet;
 	while(1)
 	{
-		char c = getch();
+		char c = getch(); //!< Input from user
 		
 		if(c == 0)
 		{
