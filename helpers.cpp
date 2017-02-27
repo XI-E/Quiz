@@ -2,12 +2,11 @@
 
 int wrap(char inp_str[], char out_str[],int length)
 {
-	char word[30];
+	char word[30];  //!< word extracted from inp_str
 
-	int chars_read = 0;
-	int read;
-	int written = 0;
-	int num_lines = 1;
+	int chars_read = 0; //!< total number of chararacter read from inp_str
+	int read; //!< number of characters read for the current line
+	int num_lines = 1; //!< Number of lines written into out_str
 
 	while(sscanf(inp_str + chars_read, "%s%n", word, &read) > 0)
 	{
@@ -17,13 +16,11 @@ int wrap(char inp_str[], char out_str[],int length)
 			num_lines++;
 			strcat(out_str, word);
 			strcat(out_str, " ");
-			written = strlen(word) + 1;
 		}
 		else
 		{
 			strcat(out_str, word);
 			strcat(out_str, " ");
-			written += strlen(word) + 1;
 		}
 		chars_read += read;
 	}

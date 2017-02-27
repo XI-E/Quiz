@@ -3,7 +3,7 @@
 #include "quiz.h"
 #include <string.h>
 
-question questions[3][3][3];
+question questions[3][3][3]; //!< 3d array to store questions - questions[num_levels][num_subjects][num_qs]
 
 void init_ques()
 {
