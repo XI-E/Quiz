@@ -6,17 +6,17 @@ void main()
 {
 	clrscr();
 
-	//! Boolean value indicating if user wants to play again
-	int play = 1;  
+	int play = 1;  //Boolean value indicating if user wants to play again
 
 	while(play)
 	{
-		init_ques();
 		init_ui();
+		init_qinfo();
 
-		int lvl = generate_ui(1);  
+		int lvl = generate_ui(1);  //Gets the difficulty level from user.
+									//Also includes ui for that page
 
-		int sub = generate_ui(2);  
+		int sub = generate_ui(2);  //Gets the subject from user
 
 		play = ask_q(lvl, sub);
 	}

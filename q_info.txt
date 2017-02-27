@@ -1,0 +1,25 @@
+3
+cs.txt
+Computer Science (C++)
+C++
+gk.txt
+General Knowledge (G.K.)
+G.K.
+eng.txt
+English
+English
+
+/*Everything after this line, including this one, is a comment and is ignored by the programs using this file*/
+
+q_info.txt:
+	1. First line is number of files
+	2. For every succeeding triplet of lines:
+		Line number	Function
+		1			Specifies text file containing questions of the subject
+		2			Specifies name of subject
+		3			Specifies short name of subject (to be viewed when space is less)
+	   
+cs.txt, eng.txt, gk.txt:
+	1. There are questions pertaining to three levels in each file
+	2. The first line contains three integers denoting the number of questions
+	   in each level i.e. easy, intermediate and hard respectively

@@ -1,0 +1,63 @@
+3 3 3
+Select the INCORRECT keyword in C++
+asm
+virtual
+statics
+float
+3
+
+String literal "abc" will be represented in the memory as _____
+abc\0
+abc/0
+abc|0
+abc_0
+1
+
+Which of the following header files contains the exit () function to terminate the current program in C++?
+<string.h>
+<process.h>
+<iomanip.h>
+<ctype.h>
+2
+
+The pointer which always stores the current active object address is _____
+auto_ptr
+this
+p
+None of the above
+2
+
+Which of the following is a valid real constant in exponent form in C++?
+172.E5
+1.52E07
+13,2E05
+17.17E2.3
+2
+
+In C++, the header file required to use setpricision() is ______
+<iostream.h>
+<math.h>
+<iomanip.h>
+<utility.h>
+3
+
+In C++, which of the statements is valid?
+int &refs[10] ;
+int a2[] = a ;
+a + b = c ;
+None of the above
+4
+
+Which of the following statement is correct?
+A reference has to be de-referenced to access a value.
+A reference does not need to be de-referenced to access a value.
+A reference has to be double de-referenced to access a value.
+Whether a reference should be de-referenced or not depends on the type of the reference.
+2
+
+Which of the following is correct?
+A reference is declared using * operator.
+Once a reference variable has been defined to refer to a particular variable it can refer to any other variable.
+A reference must always be initialized within classes.
+A variable can have multiple references.
+4
