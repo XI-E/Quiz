@@ -1,4 +1,4 @@
-#include "quiz.h"
+#include "quiz.hpp"
 
 extern height;
 extern width;

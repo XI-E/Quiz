@@ -1,4 +1,4 @@
-#include "quiz.h"
+#include "quiz.hpp"
 
 extern question questions[3][3][3];
 

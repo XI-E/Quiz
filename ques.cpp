@@ -1,4 +1,4 @@
-#include "quiz.h"
+#include "quiz.hpp"
 
 int num_subs;
 sub subs[SUB_MAX];

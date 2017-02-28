@@ -1,4 +1,4 @@
-#include "helpers.h"
+#include "helpers.hpp"
 
 int wrap(char inp_str[], char out_str[],int length)
 {
@@ -8,6 +8,8 @@ int wrap(char inp_str[], char out_str[],int length)
 	int read;
 	int written = 0;
 	int num_lines = 1;
+	
+	strcpy(out_str, "");
 
 	while(sscanf(inp_str + chars_read, "%s%n", word, &read) > 0)
 	{

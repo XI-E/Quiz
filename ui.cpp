@@ -1,4 +1,4 @@
-#include "quiz.h"
+#include "quiz.hpp"
 
 #define TITLE "TEST YOUR KNOWLEDGE!"
 
@@ -333,4 +333,114 @@ int select(coord bullet1, int num_ops, int height_ops[], char bullet)
 			}
 		}	
 	}
+}
+
+int props(const int num_ops, char ops[][STDSTRLEN], char head[], int print_mode, coord f_uleft) //PrOps Print Options
+{
+	//Determining height and witdth of the frame
+	
+	int maxf_width = (8 * width)/10;
+	int f_width = 2; //2 lines for sides of frame
+	int f_ws = 1; //Whitespace in frame from both sides
+	
+	int h_len, ops_len[SUB_MAX];
+	h_len = strlen(head); getch(); cout << head << endl << h_len; getch(); clrscr();
+	for(int i = 0; i < num_ops; i++)
+	{
+		ops_len[i] = strlen(ops[i]);
+	}
+	
+	f_width += h_len + 2 * f_ws;
+	if(f_width > maxf_width)
+	{
+		f_width = maxf_width;
+	}
+	
+	int s_bullet = 2, s_num = 0; //Space needed for bullet amd numbering
+	if(print_mode != NONUM)
+	{
+		s_num = 3; getch();
+	}
+	
+	for(i = 0; i < num_ops; i++)
+	{
+		int width = ops_len[i] + 2 * f_ws + s_bullet + s_num;
+		if(width > f_width)
+		{
+			f_width = width;
+		}
+		else if(width > maxf_width)
+		{
+			f_width = maxf_width;
+			break;
+		}
+	}
+	
+	int f_height = 2; //2 lines, 1 from top and 1 from bottom left empty
+	char fops[SUB_MAX][STDSTRLEN];
+	char fhead[BIGSTRLEN(3)];
+	int head_height, ops_height[SUB_MAX];
+	
+	head_height = wrap(head,fhead,f_width - 2 * f_ws);
+	f_height += head_height;
+	
+	for(i = 0; i < num_ops; i++)
+	{
+		ops_height[i] = wrap(ops[i],fops[i], f_width - 2 * f_ws - s_bullet - s_num);
+		f_height += ops_height[i];
+	}
+	
+	//Determining upper left coordinates of frame
+	if(f_uleft.x < 1 || f_uleft.y < 1 || f_uleft.x > width - f_width || f_uleft.y > height - f_height)
+	{
+		f_uleft.x = (width - f_width) / 2 + 1;
+		f_uleft.y = (height - f_height) / 2 + 1;
+	}
+	
+	//frame
+	
+	frame(f_uleft, f_height, f_width, NOSIDES);
+	
+	//Printing head and ops
+	
+	coord head_coord(f_uleft.x + f_ws + 1, f_uleft.y + 1 + 1);
+	
+	int line_num = 0;
+	char line[BIGSTRLEN(2)];
+	int read;
+	int chars_read = 0;
+
+	for(i = 0; i < head_height; i++)
+	{
+		sscanf(fhead + chars_read, "%[^\n]%*c%n", line, &read);
+		gotoxy(head_coord.x + s_bullet, head_coord.y + line_num);
+		cout << line;
+		line_num++;
+		chars_read += read;
+	}
+	
+	coord bullet1(head_coord.x, head_coord.y + line_num);
+	for(i = 0; i < num_ops; i++)
+	{
+		chars_read = 0;
+		gotoxy(head_coord.x + s_bullet, head_coord.y + line_num);
+		if(print_mode == ALPHA)
+		{
+			cout << (char) ('A' + i) << '.';
+		}
+		else if(print_mode == NUM)
+		{
+			cout << i + 1 << '.';
+		}
+		for(int j = 0; j < ops_height[i]; j++)
+		{
+			sscanf(fops[i] + chars_read, "%[^\n]%*c%n", line, &read);
+			gotoxy(head_coord.x + s_bullet + s_num, head_coord.y + line_num);
+			cout << line;
+			line_num++;
+			chars_read += read;
+		}
+	}
+	
+	return select(bullet1, num_ops, ops_height);
 }
