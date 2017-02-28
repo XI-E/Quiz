@@ -6,7 +6,7 @@
 #ifndef QUIZ_H
 #define QUIZ_H
 
-#include "helpers.h"
+#include "helpers.hpp"
 #include <iostream.h>
 #include <conio.h>
 #include <stdlib.h>
@@ -17,12 +17,18 @@
 #include <fstream.h>
 
 #define SUB_MAX 5
+#define STDSTRLEN 100
+#define BIGSTRLEN(factor) (STDSTRLEN * factor)
+#define SMALLSTRLEN(factor) (STDSTRLEN / factor) 
+
+enum frame_modes {NOSIDES, SIDES};
+enum print_modes {NUM, ALPHA, SROM, CROM, NONUM};
 
 //! Structure to represent a question
 struct question
 {
-	char q[200]; //!< The question
-	char options[4][100]; //!< The options
+	char q[BIGSTRLEN(2)]; //!< The question
+	char options[4][STDSTRLEN]; //!< The options
 	int correct; //!< The correct option (option count starts from 1)
 };
 
@@ -158,4 +164,7 @@ extern sub subs[SUB_MAX];
 extern int num_subs;
 void init_qinfo();
 
-#endif //QUIZ_H
+extern int height, width;
+int props(const int num_ops, char ops[][STDSTRLEN], char head[], int print_mode = NONUM, coord f_uleft = coord(-1,-1));
+
+#endif /* QUIZ_H */
