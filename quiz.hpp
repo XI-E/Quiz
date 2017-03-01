@@ -1,10 +1,10 @@
 /*!
- \file quiz.h
+ \file quiz.hpp
  \brief Contains prototypes of all functions required
 */
 
-#ifndef QUIZ_H
-#define QUIZ_H
+#ifndef QUIZ_HPP
+#define QUIZ_HPP
 
 #include "helpers.hpp"
 #include <iostream.h>
@@ -20,6 +20,8 @@
 #define STDSTRLEN 100
 #define BIGSTRLEN(factor) (STDSTRLEN * factor)
 #define SMALLSTRLEN(factor) (STDSTRLEN / factor) 
+#define TITLE "TEST YOUR KNOWLEDGE!"
+#define MAXQPERLVL 10
 
 enum frame_modes {NOSIDES, SIDES};
 enum print_modes {NUM, ALPHA, SROM, CROM, NONUM};
@@ -28,7 +30,7 @@ enum print_modes {NUM, ALPHA, SROM, CROM, NONUM};
 struct question
 {
 	char q[BIGSTRLEN(2)]; //!< The question
-	char options[4][STDSTRLEN]; //!< The options
+	char options[4][BIGSTRLEN(2)]; //!< The options
 	int correct; //!< The correct option (option count starts from 1)
 };
 
@@ -101,26 +103,6 @@ struct coord
 */
 void frame (coord up_left = coord(-1,-1), int f_height = -1, int f_width = -1, int f_sides = 1);
 
-//! Generates UI for specified screen
-/*!
- The UI generated includes selection of option and putting them in a frame
- @param[in] screen_num Screen Number (1: Difficulty, 2: Subject)
- @return The line selected (starting from 0)
- \sa frame(), printc(), coord, select()
-*/
-int generate_ui(int screen_num);
-
-//! Generates UI for question screen
-/*!
- The UI generated includes selection of option and putting them in a frame
- @param[in] lvl   Difficulty Level
- @param[in] sub   Subject
- @param[in] q_num Question Number (starts from 0)
- @return The option selected (starting from 0)
- \sa frame(), printc(), coord, select()
-*/
-int generate_ui(int lvl, int sub, int q_num);
-
 //askq.cpp
 
 //! Asks questions
@@ -134,6 +116,35 @@ int generate_ui(int lvl, int sub, int q_num);
 */
 int ask_q(int lvl, int sub);
 
+/*!
+ \overload
+*/
+int select(coord line1, int num_ops, char bullet = (char) 175);
+
+struct sub
+{
+	char fname[SMALLSTRLEN(2)];
+	char sub_name[BIGSTRLEN(2)];
+	char short_name[SMALLSTRLEN(2)];
+	int q_per_level[3];
+};
+
+extern sub subs[SUB_MAX];
+extern int num_subs;
+void init_qinfo();
+
+extern int height, width;
+coord props(const int num_ops, char ops[][BIGSTRLEN(2)], char head[], coord& f_uleft, int ops_height[], int print_mode = NONUM);
+void prhead(char left[], char middle[], char right[]);
+void prfoot(char left[], char middle[], char right[]);
+int prscr(int screen_num);
+int play();
+
+enum select_modes { NO_NAV,
+				    BCKSPC,
+				    ESC
+				  };
+				  
 //! Makes the user select the option
 /*!
  Takes in coordinates of first bullet, number of options and prints the bullets
@@ -146,25 +157,6 @@ int ask_q(int lvl, int sub);
  @return The selected option (starts from 0)
  \sa coord
 */
-int select(coord bullet1, int num_ops, int* height_ops, char bullet = (char) 175);
+int select(coord bullet1, int num_ops, int* height_ops, int mode = NO_NAV, char bullet = (char) 175);
 
-/*!
- \overload
-*/
-int select(coord line1, int num_ops, char bullet = (char) 175);
-
-struct sub
-{
-	char fname[50];
-	char sub_name[75];
-	char short_name[50];
-};
-
-extern sub subs[SUB_MAX];
-extern int num_subs;
-void init_qinfo();
-
-extern int height, width;
-int props(const int num_ops, char ops[][STDSTRLEN], char head[], int print_mode = NONUM, coord f_uleft = coord(-1,-1));
-
-#endif /* QUIZ_H */
+#endif /* QUIZ_HPP */

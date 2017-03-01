@@ -6,18 +6,13 @@ sub subs[SUB_MAX];
 void init_ques(int lvl, int sub, int q_num, question& ques)
 {
 	ifstream subfile(subs[sub].fname);
-	int q_per_level[3];
-	for(int i = 0; i < 3; i++)
-	{
-		subfile >> q_per_level[i];
-	}
 	
 	//gotoline
 	int curr_line = 1; subfile.seekg(ios::beg);
 	int desired_line = 1 + 1; int lines_per_q = 7;
-	for(i = 0; i < lvl; i++)
+	for(int i = 0; i < lvl; i++)
 	{
-		desired_line += lines_per_q * q_per_level[i]; //Navigating to beginning of the questions of level lvl
+		desired_line += lines_per_q * subs[sub].q_per_level[i]; //Navigating to beginning of the questions of level lvl
 	}
 	desired_line += (q_num) * lines_per_q; //Navigating to that question
 	
@@ -32,9 +27,11 @@ void init_ques(int lvl, int sub, int q_num, question& ques)
 	subfile.getline(ques.q, 200);
 	for(i = 0; i < 4; i++)
 	{
-		subfile.getline(ques.options[i], 100);
+		subfile.getline(ques.options[i], 200);
 	}
-	subfile >> ques.correct; subfile.ignore(100, '\n');
+	subfile >> ques.correct;
+	ques.correct--; //Making it zero indexed
+	subfile.ignore(100, '\n');
 }
 
 void init_qinfo()
@@ -47,5 +44,11 @@ void init_qinfo()
 		qinfo.getline(subs[i].fname, 50);
 		qinfo.getline(subs[i].sub_name, 75);
 		qinfo.getline(subs[i].short_name, 50);
+		
+		ifstream subfile(subs[i].fname);
+		for(int j = 0; j < 3; j++)
+		{
+			subfile >> subs[i].q_per_level[j];
+		}
 	}
 }

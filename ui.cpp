@@ -1,446 +1,211 @@
 #include "quiz.hpp"
 
-#define TITLE "TEST YOUR KNOWLEDGE!"
+int sub_num, lvl;
+char lefthead[STDSTRLEN] = "Difficulty: ";
+char righthead[STDSTRLEN] = "Subject: ";
+int total_correct, ques_attempted;
 
-int height, width;
-
-void init_ui()
+int prscr(int screen_num)
 {
-	_setcursortype(_NOCURSOR); //hides cursor
-	textcolor(LIGHTGRAY);
-	textbackground(BLACK);
-
-	struct text_info info;
-	gettextinfo(&info);
-
-	//height and witdth of screen
-	width = (int) info.screenwidth;
-	height = (int) info.screenheight;
-}
-
-void frame(coord up_left, int f_height, int f_width, int f_sides)
-{
-	char l_up = (char) 201;
-	char l_down = (char) 200;
-	char r_up = (char) 187;
-	char r_down = (char) 188;
-	char bet_ver = (char) 186;
-	char bet_hor = (char) 205;
-
-	if(up_left.x == -1)
+	coord f_uleft, bullet1;
+	int response, height_ops[SUB_MAX];
+	switch(screen_num)
 	{
-		coord b(1,1);
-		up_left = b;
-		f_width = width;
-		f_height = height - 1;
-	}
-
-	gotoxy(up_left.x, up_left.y);
-
-	cout << l_up;
-	for(int i = 0; i < f_width - 2; i++)
-	{
-		cout << bet_hor;
-	}
-	cout << r_up;
-
-	if(f_sides)
-	{
-		for(i = 2; i <= f_height - 1; i++)
-		{
-			gotoxy(up_left.x, i); cout << bet_ver;
-			gotoxy(up_left.x + f_width - 1, i); cout << bet_ver;
-		}
-	}
-
-	gotoxy(up_left.x, up_left.y + f_height + 1);
-	cout << l_down;
-	for(i = 0; i < f_width - 2; i++)
-	{
-		cout << bet_hor;
-	}
-	cout << r_down;
-
-	gotoxy(up_left.x + 2, up_left.y + 2);
-}
-
-void printc(char str[], int ws, int t_color, int b_color)
-{
-	if(ws == -1)
-	{
-		gotoxy((width - strlen(str))/2 + 1 ,wherey());
-	}
-	else
-	{
-		gotoxy(ws + 1, wherey());
-	}
-
-	textcolor(t_color);
-	textbackground(b_color);
-	cprintf("%s", str);
-}
-
-/*
- Generates user interface
- Screen_num:
-	1: difficulty level
-	2: Subject
-*/
-int generate_ui(int screen_num)
-{
-	clrscr();
-	frame();
-
-	char title[] = TITLE;
-	char head[100], op1[100], op2[100], op3[100];
-	if(screen_num == 1)
-	{
-		strcpy(head, "Select difficulty level: ");
-		strcpy(op1, "Easy");
-		strcpy(op2, "Intermediate");
-		strcpy(op3, "Hard");
-	}
-	else if(screen_num == 2)
-	{
-		strcpy(head, "Select subject: ");
-		strcpy(op1, subs[0].sub_name);
-		strcpy(op2, subs[1].sub_name);
-		strcpy(op3, subs[2].sub_name);
-	}
-
-	gotoxy(1, (height - 6) / 2);
-
-	printc(title);
-	cout << "\n\n";
-
-	int lengths[] = {
-					  strlen(head),
-					  strlen(op1),
-					  strlen(op2),
-					  strlen(op3),
-					};
-
-	//Determining max length
-	int max_len = lengths[0];
-	for(int i = 0; i < 4; i++)
-	{
-		for(int j = i + 1; j < 4; j++)
-		{
-			if(lengths[j] > max_len)
+		//Screen 1: Select Subject
+		case 1:
 			{
-				max_len = lengths[j];
+				clrscr();
+				frame();
+				char sub_names[SUB_MAX][BIGSTRLEN(2)];
+				for(int i = 0; i < num_subs; i++)
+				{
+					strcpy(sub_names[i], subs[i].sub_name);
+				}
+			
+				bullet1 = props(num_subs, sub_names, "Select Subject:", f_uleft, height_ops, NUM);
+				gotoxy(1, f_uleft.y - 2);
+				printc(TITLE);
+				response = select(bullet1, 3, height_ops);
+			
+				return response;
 			}
-		}
+		//Screen 2: Select Difficulty
+		case 2:
+			{
+				clrscr();
+				frame();
+				prhead("", "Press BACKSPACE to go back", righthead);
+				char diff_levels[3][BIGSTRLEN(2)] = {"Easy", "Intermediate", "Hard"};
+				bullet1 = props(3, diff_levels, "Select difficulty level:", f_uleft, height_ops);
+				gotoxy(1, f_uleft.y - 2);
+				printc(TITLE);
+				response = select(bullet1, 3, height_ops, BCKSPC);
+				
+				return response;
+			}
+			
+		//Screen 3: Questions
+		case 3:
+			{
+				int num_ques = subs[sub_num].q_per_level[lvl];
+			
+				int q_asked[MAXQPERLVL];
+				for(int i = 0; i < num_ques; i++)
+				{
+					q_asked[i] = 0;
+				}
+				total_correct = 0;
+				ques_attempted = 0;
+			
+				for(i = 0; i < num_ques; i++)
+				{				
+					//Determining question number
+					time_t t;
+					srand((unsigned) time(&t));
+					int q_num;
+					do
+					{
+						q_num = rand() % num_ques;
+					}
+					while(q_asked[q_num] == 1);
+					q_asked[q_num] = 1;
+				
+					//Initialising ques with the question
+					question ques;
+					init_ques(lvl, sub_num, q_num, ques);
+				
+					//Randomising the order of options and setting the correct option number
+					//according to the new order
+					int op_chosen[4], op_order[4], op_num = 0;
+					for(int j = 0; j < 4; j++)
+					{
+						op_chosen[j] = 0;
+					}
+				
+					srand((unsigned) time(&t));
+					for(j = 0; j < 4; j++)
+					{
+						do
+						{
+							op_num = rand() % 4;
+						}
+						while(op_chosen[op_num] == 1);
+					
+						op_chosen[op_num] = 1;
+						op_order[j] = op_num;
+					}
+				
+					int correct;
+					for(j = 0; j < 4; j++)
+					{
+						if(ques.correct == op_order[j])
+						{
+							correct = j;
+						}
+					}
+				
+					//Setting the options according to order
+					char ordered_ops[4][BIGSTRLEN(2)];
+					for(j = 0; j < 4; j++)
+					{
+						strcpy(ordered_ops[j], ques.options[op_order[j]]);
+					}
+				
+					//Printing the options
+					clrscr();
+					frame();
+					char centerhead[STDSTRLEN] = "Question ";
+					char a[2]; itoa(i+1, a, 10);
+					strcat(centerhead, a);
+					prhead(lefthead, centerhead, righthead);
+					prfoot("", "Press ESC to end the round", "");
+					bullet1 = props(4, ordered_ops, ques.q, f_uleft, height_ops, ALPHA);
+					gotoxy(1, f_uleft.y - 2 - 2);
+					printc(TITLE);
+					response = select(bullet1, 4, height_ops, ESC);
+					
+					if(response == -2)
+					{
+						break;
+					}
+
+					gotoxy(1, f_uleft.y - 2);
+					ques_attempted++;
+					if(response == correct)
+					{
+						printc("Correct Answer!");
+						total_correct++;
+					}
+					else
+					{
+						char out[STDSTRLEN] = "Incorrect Answer! The correct answer was ";
+						char a[] = {(char) ('A' + correct), '\0'};
+						strcat(out, a);
+						printc(out);
+					}
+					
+					getch();
+				}
+				return 0;
+			}
+		//Screen 4: Result and asking user if he wants to play again
+		case 4:
+			{
+				clrscr();
+				frame();
+				prhead(lefthead, "", righthead);
+				gotoxy(1, 5); printc(TITLE);
+			
+				int len = strlen("You got _ out of _ questions correct");			
+				gotoxy((width - len) / 2 + 1, (height - 3) / 2 + 1);
+				cout << "You got " << total_correct << " out of " << ques_attempted << " questions correct";
+				cout << endl << endl;
+				printc("Do you want to play again (y/n) ?");
+				while(1)
+				{
+					char c = getch();
+					switch(c)
+					{
+						case 'y':
+						case 'Y':
+							return 1;
+						case 'n':
+						case 'N':
+							return 0;
+					}
+				}
+			}
 	}
-
-	int a = (width - max_len) / 2;
-	coord b(a - 4,wherey());
-	frame(b, 6, max_len + 8, 0);
-
-	printc(head, a);
-	cout << '\n';
-	
-	coord bullet1(b.x + 2, wherey());
-	
-	gotoxy(bullet1.x + 2, bullet1.y); printc(op1, a); cout << '\n';
-	gotoxy(bullet1.x + 2, bullet1.y + 1); printc(op2, a); cout << '\n';
-	gotoxy(bullet1.x + 2, bullet1.y + 2); printc(op3, a); cout << '\n';
-	
-	return select(bullet1, 3);
+	return -1;
 }
 
-int generate_ui(int lvl, int sub, int q_num)
+int play()
 {
-	clrscr();
-	frame();
-
-	gotoxy(2,2); cout << "Difficulty: ";
+	do
+	{
+		strcpy(righthead, "Subject: ");
+		sub_num = prscr(1);
+		strcat(righthead, subs[sub_num].short_name);
+	
+		lvl = prscr(2);
+	}
+	while(lvl == -1);
+	
+	strcpy(lefthead, "Difficulty: ");
 	switch(lvl)
 	{
 		case 0:
-			cout << "Easy";
+			strcat(lefthead, "Easy");
 			break;
 		case 1:
-			cout << "Intermediate";
+			strcat(lefthead, "Intermediate");
 			break;
 		case 2:
-			cout << "Hard";
+			strcat(lefthead, "Hard");
 			break;
 	}
 	
-	char print[100] = "Subject: ";
-	strcat(print, subs[sub].short_name);
+	prscr(3);
 	
-	
-	gotoxy(width - strlen(print), 2);
-	cout << print;
-	
-	question ques;
-
-	init_ques(lvl, sub, q_num, ques);
-
-	int f_width = (8 * width) / 10;
-	int ws = (width - f_width) / 2;
-
-	int lengths[] = {
-					 strlen(ques.q),
-					 strlen(ques.options[0]),
-					 strlen(ques.options[1]),
-					 strlen(ques.options[2]),
-					 strlen(ques.options[3])
-					};
-
-	int f_height = 2 + lengths[0] / f_width + 1;
-	int f_ws = 3;  //Whitespace inside frame for options
-	for(int i = 1; i < 5; i++)
-	{
-		f_height += lengths[i] / (f_width - f_ws) + 1;
-	}
-
-	coord u_left(ws + 1, (height - f_height) / 2 + 1);
-	frame(u_left, f_height, f_width, 0);
-	
-	char printq[] = "Question ";
-	gotoxy((width - strlen(printq) - 1) / 2 + 1, 2);
-	cout << printq << q_num + 1;
-	
-	gotoxy(1, (height - f_height) / 2 - 3);
-	printc(TITLE);
-
-	char fstring[200] = "";
-
-	int height_ops[4] = {0,0,0,0};
-	int height_ques = wrap(ques.q, fstring, f_width - f_ws);
-
-	int line_num = 1;
-	char line[200];
-	int read;
-	int chars_read = 0;
-	coord ques_coord(u_left.x + 1, u_left.y + 2);
-
-	for(i = 0; i < height_ques; i++)
-	{
-		sscanf(fstring + chars_read, "%[^\n]%*c%n", line, &read);
-		gotoxy(ques_coord.x + 2, ques_coord.y + line_num - 1);
-		cout << line;
-		line_num++;
-		chars_read += read;
-	}
-
-	strcpy(fstring, "");
-
-	coord bullet1(ques_coord.x, ques_coord.y + height_ques);
-
-	for(i = 0; i < 4; i++)
-	{
-		height_ops[i] = wrap(ques.options[i], fstring, f_width - f_ws - 3 - 2);
-		read = 0, chars_read = 0;
-
-		int len = strlen(fstring);
-		fstring[len] = '\n'; fstring[len+1] = '\0';
-
-		coord op_start(bullet1.x + 2 + 3, bullet1.y); // x: +2 space for bullet, +3 space for option letter
-		
-		for(int j = 0; j < i; j++)
-		{
-			op_start.y += height_ops[j];
-		}
-		
-		gotoxy(bullet1.x + 2, op_start.y);
-		cout << (char) ('A' + i) << ". ";
-		
-		for(j = 0; j < height_ops[i]; j++)
-		{
-			sscanf(fstring + chars_read, "%[^\n]%*c%n", line, &read);
-			gotoxy(op_start.x, op_start.y + j);
-			line_num++;
-			cout << line;
-			chars_read += read;
-		}
-
-		strcpy(fstring, "");
-	}
-	
-	int selected_ans = select(bullet1, 4, height_ops) + 1;
-	gotoxy(1, (height - f_height) / 2 - 1);
-	if(selected_ans == ques.correct)
-	{
-		printc("Correct Answer!!");
-		return 1;
-	}
-	else
-	{
-		char pr[] = "Incorrect Answer!! Correct answer was "; 
-		char a[2] = {(char) ('A' + ques.correct - 1),'\0'};
-		strcat(pr,a);
-		printc(pr);
-		return 0;
-	}	
-}
-
-int select(coord bullet1, int num_ops, char bullet)
-{
-	int height_ops[] = {1,1,1,1,1};
-	return select(bullet1, num_ops, height_ops, bullet); 
-}
-
-int select(coord bullet1, int num_ops, int height_ops[], char bullet)
-{
-	int curr_line = 0;
-	gotoxy(bullet1.x, bullet1.y); cout << bullet;
-	while(1)
-	{
-		char c = getch();
-		
-		if(c == 0)
-		{
-			c = getch();
-			switch(c)
-			{
-				case 'H':
-					curr_line == 0 ? curr_line = num_ops - 1 : curr_line--;
-					break;
-				case 'P':
-					curr_line == num_ops - 1 ? curr_line = 0 : curr_line++;
-					break;
-			}
-		}
-		else if(c == 13)
-		{
-			return curr_line;
-		}
-		
-		for(int i = 0; i < num_ops; i++)
-		{
-			coord bullet_pos;
-			
-			bullet_pos.x = bullet1.x;
-			bullet_pos.y = bullet1.y;
-			for(int j = 0; j < i; j++)
-			{
-				bullet_pos.y += height_ops[j];
-			}
-			
-			gotoxy(bullet_pos.x, bullet_pos.y);
-			
-			if(i == curr_line)
-			{
-				cout << bullet;
-			}
-			else
-			{
-				cout << ' ';
-			}
-		}	
-	}
-}
-
-int props(const int num_ops, char ops[][STDSTRLEN], char head[], int print_mode, coord f_uleft) //PrOps Print Options
-{
-	//Determining height and witdth of the frame
-	
-	int maxf_width = (8 * width)/10;
-	int f_width = 2; //2 lines for sides of frame
-	int f_ws = 1; //Whitespace in frame from both sides
-	
-	int h_len, ops_len[SUB_MAX];
-	h_len = strlen(head); getch(); cout << head << endl << h_len; getch(); clrscr();
-	for(int i = 0; i < num_ops; i++)
-	{
-		ops_len[i] = strlen(ops[i]);
-	}
-	
-	f_width += h_len + 2 * f_ws;
-	if(f_width > maxf_width)
-	{
-		f_width = maxf_width;
-	}
-	
-	int s_bullet = 2, s_num = 0; //Space needed for bullet amd numbering
-	if(print_mode != NONUM)
-	{
-		s_num = 3; getch();
-	}
-	
-	for(i = 0; i < num_ops; i++)
-	{
-		int width = ops_len[i] + 2 * f_ws + s_bullet + s_num;
-		if(width > f_width)
-		{
-			f_width = width;
-		}
-		else if(width > maxf_width)
-		{
-			f_width = maxf_width;
-			break;
-		}
-	}
-	
-	int f_height = 2; //2 lines, 1 from top and 1 from bottom left empty
-	char fops[SUB_MAX][STDSTRLEN];
-	char fhead[BIGSTRLEN(3)];
-	int head_height, ops_height[SUB_MAX];
-	
-	head_height = wrap(head,fhead,f_width - 2 * f_ws);
-	f_height += head_height;
-	
-	for(i = 0; i < num_ops; i++)
-	{
-		ops_height[i] = wrap(ops[i],fops[i], f_width - 2 * f_ws - s_bullet - s_num);
-		f_height += ops_height[i];
-	}
-	
-	//Determining upper left coordinates of frame
-	if(f_uleft.x < 1 || f_uleft.y < 1 || f_uleft.x > width - f_width || f_uleft.y > height - f_height)
-	{
-		f_uleft.x = (width - f_width) / 2 + 1;
-		f_uleft.y = (height - f_height) / 2 + 1;
-	}
-	
-	//frame
-	
-	frame(f_uleft, f_height, f_width, NOSIDES);
-	
-	//Printing head and ops
-	
-	coord head_coord(f_uleft.x + f_ws + 1, f_uleft.y + 1 + 1);
-	
-	int line_num = 0;
-	char line[BIGSTRLEN(2)];
-	int read;
-	int chars_read = 0;
-
-	for(i = 0; i < head_height; i++)
-	{
-		sscanf(fhead + chars_read, "%[^\n]%*c%n", line, &read);
-		gotoxy(head_coord.x + s_bullet, head_coord.y + line_num);
-		cout << line;
-		line_num++;
-		chars_read += read;
-	}
-	
-	coord bullet1(head_coord.x, head_coord.y + line_num);
-	for(i = 0; i < num_ops; i++)
-	{
-		chars_read = 0;
-		gotoxy(head_coord.x + s_bullet, head_coord.y + line_num);
-		if(print_mode == ALPHA)
-		{
-			cout << (char) ('A' + i) << '.';
-		}
-		else if(print_mode == NUM)
-		{
-			cout << i + 1 << '.';
-		}
-		for(int j = 0; j < ops_height[i]; j++)
-		{
-			sscanf(fops[i] + chars_read, "%[^\n]%*c%n", line, &read);
-			gotoxy(head_coord.x + s_bullet + s_num, head_coord.y + line_num);
-			cout << line;
-			line_num++;
-			chars_read += read;
-		}
-	}
-	
-	return select(bullet1, num_ops, ops_height);
+	return prscr(4);
 }

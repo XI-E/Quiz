@@ -1,10 +1,10 @@
 /*!
- \file helpers.h
+ \file helpers.hpp
  \brief Contains helper functions such as wrap	
 */
 
-#ifndef HELPERS_H
-#define HELPERS_H
+#ifndef HELPERS_HPP
+#define HELPERS_HPP
 
 #include <stdio.h>
 #include <string.h>
@@ -20,4 +20,4 @@
 */
 int wrap(char* inp_str, char* out_str, int length);
 
-#endif //HELPERS_H
+#endif //HELPERS_HPP
