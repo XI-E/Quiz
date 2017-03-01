@@ -16,7 +16,7 @@ void init_ui()
 	height = (int) info.screenheight;
 }
 
-void frame(coord up_left, int f_height, int f_width, int f_sides)
+void frame(coord up_left, int f_height, int f_width, int f_mode)
 {
 	char l_up = (char) 201;
 	char l_down = (char) 200;
@@ -46,7 +46,7 @@ void frame(coord up_left, int f_height, int f_width, int f_sides)
 	cout << r_up;
 	//cout << f_width % 10;
 
-	if(f_sides)
+	if(f_mode == SIDES)
 	{
 		for(i = 0; i < f_height - 2; i++)
 		{
