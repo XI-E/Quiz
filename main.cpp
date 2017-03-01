@@ -1,23 +1,16 @@
-#include "quiz.h"
-
-extern question questions[3][3][3];
+#include "quiz.hpp"
 
 void main()
 {
 	clrscr();
-
-	//! Boolean value indicating if user wants to play again
-	int play = 1;  
-
-	while(play)
+	init_ui();
+	init_qinfo();
+	
+	int play_again;
+	
+	do
 	{
-		init_ques();
-		init_ui();
-
-		int lvl = generate_ui(1);  
-
-		int sub = generate_ui(2);  
-
-		play = ask_q(lvl, sub);
+		play_again = play();
 	}
+	while(play_again == 1);
 }
