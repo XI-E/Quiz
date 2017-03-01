@@ -123,6 +123,9 @@ extern int width; //!< Width of the screen
 */
 void printc(char* str, int ws = (-1), int t_color = LIGHTGRAY, int b_color = BLACK);
 
+//! Defines the modes from printing the frame
+enum frame_modes {NOSIDES, SIDES};
+
 //! Generates a frame
 /*!
  @param[in] up_left  Upper left coordinate of frame; upper-left corner of window, if not specified
@@ -133,9 +136,6 @@ void printc(char* str, int ws = (-1), int t_color = LIGHTGRAY, int b_color = BLA
  \sa coord, frame_modes
 */
 void frame (coord up_left = coord(-1,-1), int f_height = -1, int f_width = -1, int f_mode = SIDES);
-
- //! Defines the modes from printing the frame
-enum frame_modes {NOSIDES, SIDES};
 
 //! Defines what type of key will invoke the select function to return a value
 /*!
