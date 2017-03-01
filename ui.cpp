@@ -287,7 +287,7 @@ int askq(int lvl, int sub_num, int q_num, int q_num2) //q_num2 is for printing p
 			correct = j;
 		}
 	}
-
+	
 	//Setting the options according to order
 	char ordered_ops[4][BIGSTRLEN(2)];
 	for(j = 0; j < 4; j++)
@@ -299,7 +299,7 @@ int askq(int lvl, int sub_num, int q_num, int q_num2) //q_num2 is for printing p
 	clrscr();
 	frame();
 	char centerhead[STDSTRLEN] = "Question ";
-	char a[2]; itoa(q_num2, a, 10);
+	char a[5]; itoa(q_num2, a, 10);
 	strcat(centerhead, a);
 	prhead(lefthead, centerhead, righthead);
 	prfoot("", "Press ESC to end the round", "");
