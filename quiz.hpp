@@ -137,7 +137,9 @@ extern int height, width;
 coord props(const int num_ops, char ops[][BIGSTRLEN(2)], char head[], coord& f_uleft, int ops_height[], int print_mode = NONUM);
 void prhead(char left[], char middle[], char right[]);
 void prfoot(char left[], char middle[], char right[]);
-int prscr(int screen_num);
+int prscr_m1(int screen_num);
+int prscr_m2();
+int getmode();
 int play();
 
 enum select_modes { NO_NAV,
