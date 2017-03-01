@@ -24,7 +24,7 @@ The pointer which always stores the current active object address is _____
 auto_ptr
 this
 p
-None of the above
+None of these
 2
 
 Which of the following is a valid real constant in exponent form in C++?
@@ -45,7 +45,7 @@ In C++, which of the statements is valid?
 int &refs[10] ;
 int a2[] = a ;
 a + b = c ;
-None of the above
+None of these
 4
 
 Which of the following statement is correct?
