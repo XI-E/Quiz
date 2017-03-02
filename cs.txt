@@ -1,4 +1,4 @@
-3 3 3
+7 4 6
 Select the INCORRECT keyword in C++
 asm
 virtual
@@ -17,6 +17,34 @@ Which of the following header files contains the exit () function to terminate t
 <string.h>
 <process.h>
 <iomanip.h>
+<ctype.h>
+2
+
+In C++, exp() and pow() functions belong to ______
+<math.h>
+<ctype.h>
+<stdio.h>
+<string.h>
+1
+
+Which of the following function(s) is/are used for console input and output in C++?
+put()
+getline()
+write()
+All of these
+4
+
+In C++, isupper() and isalnum() functions belong to _____
+<math.h>
+<ctype.h>
+<string.h>
+<iomanip.h>
+2
+
+In c++, the functions write() and open() are defined in ______
+<string.h>
+<fstream.h>
+<graphics.h>
 <ctype.h>
 2
 
@@ -41,6 +69,13 @@ In C++, the header file required to use setpricision() is ______
 <utility.h>
 3
 
+In C++, if "A" is a character pointer, then the expression A++ will increment the pointer by _____ byte(s)
+2
+4
+8
+1
+4
+
 In C++, which of the statements is valid?
 int &refs[10] ;
 int a2[] = a ;
@@ -61,3 +96,24 @@ Once a reference variable has been defined to refer to a particular variable it 
 A reference must always be initialized within classes.
 A variable can have multiple references.
 4
+
+For the C++ statement: "int* p1, p2;", Which of the following is correct?
+p1 and p2 both are pointers to int
+p1 is a pointer to int
+p2 is a pointer to int
+Neither p1 nor p2 is a pointer to int
+2
+
+For the C++ statement "int *&r = p" (assuming that p is pointer to int), which of the following is true?
+r is a pointer to p
+r is a pointer to the memory location which p points to
+r is a reference to p
+r is a reference to the memory location which p points to
+3
+
+Which of the following C++ statements is wrong?
+const int ci = 1024;
+const int &rl = ci; (Assume ci is of type const int)
+int &rl = ci; (Assume ci is of type const int)
+None of these
+3
